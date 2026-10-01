@@ -20,8 +20,8 @@ Minecraft の Mod 開発と、友人6人が実際に遊ぶサーバーの運用�
 
 | 作品 | 何をするものか | 最初に開くなら |
 |---|---|---|
-| **[fc8weight](https://gitlab.com/evar0801/fc8weight)**<br><sub>Java ／ Forge 1.20.1</sub> | 装備に重さと筋力要求を足す Mod。武器ごとの「必要筋骨」1つから、**装備できるか・攻撃力・移動速度**の3つを導く | [docs/DESIGN_LOG.md](https://gitlab.com/evar0801/fc8weight/blob/main/docs/DESIGN_LOG.md)<br><sub>捨てた案と、使われなくなったコードの死因まで</sub> |
-| **[ShauraDungeonMod](https://gitlab.com/evar0801/ShauraDungeonMod)**<br><sub>Java ／ 298ファイル・約12,000行</sub> | 専用の異世界とボス戦、感情パラメータによる物語分岐。中心に置いたローカルLLMの会話は**3方向すべてで壁にぶつかり**、その結論まで書いた | [README](https://gitlab.com/evar0801/ShauraDungeonMod#readme)<br><sub>作りたかったものと、詰んだ理由</sub> |
+| **[fc8weight](https://github.com/evar0801/fc8weight)**<br><sub>Java ／ Forge 1.20.1</sub> | 装備に重さと筋力要求を足す Mod。武器ごとの「必要筋骨」1つから、**装備できるか・攻撃力・移動速度**の3つを導く | [docs/DESIGN_LOG.md](https://github.com/evar0801/fc8weight/blob/main/docs/DESIGN_LOG.md)<br><sub>捨てた案と、使われなくなったコードの死因まで</sub> |
+| **[ShauraDungeonMod](https://github.com/evar0801/ShauraDungeonMod)**<br><sub>Java ／ 298ファイル・約12,000行</sub> | 専用の異世界とボス戦、感情パラメータによる物語分岐。中心に置いたローカルLLMの会話は**3方向すべてで壁にぶつかり**、その結論まで書いた | [README](https://github.com/evar0801/ShauraDungeonMod#readme)<br><sub>作りたかったものと、詰んだ理由</sub> |
 | **[MCP-IDS](https://github.com/atmatsuda/techc_hack7)**<br><sub>Python ／ ハッカソン</sub> | AI エージェントが外部の文章に仕込まれた命令に騙される瞬間を、**通信を傍受して捕まえる**。実装は自分が担当 | [viewer/index.html](https://github.com/atmatsuda/techc_hack7/blob/main/viewer/index.html)<br><sub>ダウンロードしてブラウザで開くだけのデモ</sub> |
 
 MCP-IDS はチームのリポジトリにあります。実装を誰が書いたかは[コミット履歴](https://github.com/atmatsuda/techc_hack7/commits/main/)で確認できます。
@@ -70,7 +70,7 @@ AI が出すコードは動きはしますが、**そのまま使うと冗長に
 
 | | 具体例 |
 |---|---|
-| **構造を作り直す** | 移動速度のペナルティが6系統あり、それぞれに上限が付いていた。掛け算で合成されるため **6つ同時に効くと実質停止**すると分かり、「合成してから1回だけ上限を掛ける」形に作り直した（[fc8weight](https://gitlab.com/evar0801/fc8weight)） |
+| **構造を作り直す** | 移動速度のペナルティが6系統あり、それぞれに上限が付いていた。掛け算で合成されるため **6つ同時に効くと実質停止**すると分かり、「合成してから1回だけ上限を掛ける」形に作り直した（[fc8weight](https://github.com/evar0801/fc8weight)） |
 | **判定のしかたを変える** | 攻撃力ボーナスの実装で **バニラのツルハシが「誰も装備できない攻撃力30の武器」**になった。「しきい値で道具と武器を分ける」案は、鉄のツルハシが閾値と同値だと分かった時点で捨て、**型で判定する方式**に切り替えた |
 | **AI に渡す前提を管理する** | 各プロジェクトに `CLAUDE.md`（前提・禁止事項）と `DECISIONS.md`（判断ログ）を置き、AI に渡す文脈を明文化。**採用した案だけでなく、捨てた案と、使われなくなったコードがなぜ死んだのか**まで残す |
 
