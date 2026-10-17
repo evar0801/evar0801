@@ -2,8 +2,8 @@
 
 Tech.C 1年・スーパーホワイトハッカー専攻。
 
-Minecraft の Mod 開発と、友人6人が実際に遊ぶサーバーの運用。
-それに、ハッカソンで作った AI エージェント向けの侵入検知ツール。
+AI（Claude Code）に任せる範囲と任せない範囲を、ルールではなく仕組みで決めて運用しています。
+その上で、友人と遊ぶゲームサーバーの運用と、Minecraft / Valheim の Mod 開発をしています。
 
 **作ったものと、その設計判断 → [evar0801.github.io](https://evar0801.github.io/)**
 10分ほどで読める1ページにまとめています。コードより先に、こちらを読んでいただくのが早いです。
@@ -14,14 +14,21 @@ Minecraft の Mod 開発と、友人6人が実際に遊ぶサーバーの運用�
 
 ---
 
-## 作ったもの
+## いま動かしているもの
+
+| 作品 | 何をするものか | 最初に開くなら |
+|---|---|---|
+| **[respawnkeeper](https://github.com/evar0801/respawnkeeper)**<br><sub>PowerShell ／ Windows</sub> | ゲームサーバーが落ちたら、**1回目で原因を特定**し、直せるものだけ直して起こし直す。直せないものは止まって人を待つ。友人の Minecraft サーバーのために作り、Valheim へ広げた | [README](https://github.com/evar0801/respawnkeeper#readme)<br><sub>落ちたとき中で何が起きるか</sub> |
+| **[brownie](https://github.com/evar0801/brownie)**<br><sub>Python ／ git worktree</sub> | 席を外している間、溜めた作業を**作業票1枚＝使い捨ての Claude Code セッション**で進める。司令塔は LLM ではなく Python。外への送信・公開・削除などの線は機械が持つ | [README](https://github.com/evar0801/brownie#readme)<br><sub>なぜ作ったか・一晩の流れ</sub> |
+
+## 以前に作ったもの
 
 リポジトリ全体を読む必要はありません。右の列が、それぞれ一番見せたい場所です。
 
 | 作品 | 何をするものか | 最初に開くなら |
 |---|---|---|
 | **[fc8weight](https://github.com/evar0801/fc8weight)**<br><sub>Java ／ Forge 1.20.1</sub> | 装備に重さと筋力要求を足す Mod。武器ごとの「必要筋骨」1つから、**装備できるか・攻撃力・移動速度**の3つを導く | [docs/DESIGN_LOG.md](https://github.com/evar0801/fc8weight/blob/main/docs/DESIGN_LOG.md)<br><sub>捨てた案と、使われなくなったコードの死因まで</sub> |
-| **[ShauraDungeonMod](https://github.com/evar0801/ShauraDungeonMod)**<br><sub>Java ／ 298ファイル・約12,000行</sub> | 専用の異世界とボス戦、感情パラメータによる物語分岐。中心に置いたローカルLLMの会話は**3方向すべてで壁にぶつかり**、その結論まで書いた | [README](https://github.com/evar0801/ShauraDungeonMod#readme)<br><sub>作りたかったものと、詰んだ理由</sub> |
+| **[ShauraDungeonMod](https://github.com/evar0801/ShauraDungeonMod)**<br><sub>Java ／ 約12,000行</sub> | 専用の異世界とボス戦、感情パラメータによる物語分岐。中心に置いたローカルLLMの会話は**3方向すべてで壁にぶつかり**、その結論まで書いた | [README](https://github.com/evar0801/ShauraDungeonMod#readme)<br><sub>作りたかったものと、詰んだ理由</sub> |
 | **[MCP-IDS](https://github.com/atmatsuda/techc_hack7)**<br><sub>Python ／ ハッカソン</sub> | AI エージェントが外部の文章に仕込まれた命令に騙される瞬間を、**通信を傍受して捕まえる**。実装は自分が担当 | [viewer/index.html](https://github.com/atmatsuda/techc_hack7/blob/main/viewer/index.html)<br><sub>ダウンロードしてブラウザで開くだけのデモ</sub> |
 
 MCP-IDS はチームのリポジトリにあります。実装を誰が書いたかは[コミット履歴](https://github.com/atmatsuda/techc_hack7/commits/main/)で確認できます。
@@ -74,9 +81,10 @@ AI が出すコードは動きはしますが、**そのまま使うと冗長に
 | **判定のしかたを変える** | 攻撃力ボーナスの実装で **バニラのツルハシが「誰も装備できない攻撃力30の武器」**になった。「しきい値で道具と武器を分ける」案は、鉄のツルハシが閾値と同値だと分かった時点で捨て、**型で判定する方式**に切り替えた |
 | **AI に渡す前提を管理する** | 各プロジェクトに `CLAUDE.md`（前提・禁止事項）と `DECISIONS.md`（判断ログ）を置き、AI に渡す文脈を明文化。**採用した案だけでなく、捨てた案と、使われなくなったコードがなぜ死んだのか**まで残す |
 
-いま作っている**サーバーログ解析 API は、AI に実装コードを書かせないルール**で進めています。
-Mod 開発では環境構築まで AI に任せてしまい、自分の理解が追いつかない部分が残ったためです。
-**まだ書き始めた段階で、完成していません。**
+**サーバーログ解析 API**（非公開）は、**AI に実装コードを書かせないルール**で始めました。
+Mod 開発で環境構築まで AI に任せ、自分の理解が追いつかない部分が残ったためです。
+ただ、提出の期限に間に合わず、自分の判断でそのルールを外して AI に実装させました。
+理解が進んだからではなく間に合わなかったから外した、という経緯も判断ログに残しています。
 
 ---
 
